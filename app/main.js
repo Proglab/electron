@@ -11,7 +11,7 @@ let Window =  Object.create({
             height: height
         });
 
-        this.window.loadURL(`file://${__dirname}/app/view/index.html`);
+        this.window.loadURL(`file://${__dirname}/view/index.html`);
         this.window.on('closed', function() {
             this.window = null;
         });
