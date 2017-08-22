@@ -4,7 +4,7 @@
   "description": "Transformation d'un fichier Moka en Popsy",
   "main": "main.js",
   "scripts": {
-    "start": "electron ./app/",
+    "start": "electron app/main.js",
     "test": "xo",
     "build": "electron-packager . --out=dist --asar --overwrite --all"
   },
@@ -27,5 +27,9 @@
       "node",
       "browser"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Proglab/electron.git"
   }
 }
