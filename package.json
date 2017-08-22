@@ -1,0 +1,31 @@
+{
+  "name": "moka2popsy",
+  "version": "1.0.0",
+  "description": "Transformation d'un fichier Moka en Popsy",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "xo",
+    "build": "electron-packager . --out=dist --asar --overwrite --all"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [],
+  "author": "Fabrice Gyre",
+  "license": "private",
+  "devDependencies": {
+    "asar": "^0.13.0",
+    "devtron": "^1.4.0",
+    "electron-debug": "^1.4.0",
+    "electron-packager": "^8.7.2",
+    "xo": "^0.18.2"
+  },
+  "dependencies": {
+    "electron": "^1.7.5"
+  },
+  "xo": {
+    "envs": [
+      "node",
+      "browser"
+    ]
+  }
+}
