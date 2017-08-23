@@ -2,18 +2,36 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Moka2popsy</title>
+      <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+      <link href="../assets/css/style.css" rel="stylesheet">
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-  </body>
+        <div class="container-fluid">
+            <h1>Moka2Popsy</h1>
+            <h2>Choisissez la société :</h2>
+            <div class="row">
+                <div class="col-sm-3" id="izzy"><img src="../assets/images/logos/izzy.png" class="img-responsive" /></div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-4" id="azza"><img src="../assets/images/logos/azza.png" class="img-responsive" /></div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-3" id="ozze"><img src="../assets/images/logos/ozze.png" class="img-responsive" /></div>
+            </div>
+            <h2>Choisissez le pays :</h2>
+            <input type="radio" id="town1" name="town" value="Belgique">
+            <label for="town1">Belgique</label>
+            <input type="radio" id="town2" name="town" value="France">
+            <label for="town2">France</label>
 
-  <script>
-    // You can also require other files to run in this process
-    require('../renderer.js')
-  </script>
+        </div>
+    <script>
+      const $ = jQuery = require('jquery');
+    </script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script>
+    require('../js/index.js')
+    </script>
+  </body>
 </html>

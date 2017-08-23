@@ -52,7 +52,10 @@
       "icon": "build/icon.ico"
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1"
+  },
   "xo": {
     "envs": [
       "node",
