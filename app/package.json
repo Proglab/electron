@@ -1,0 +1,14 @@
+{
+  "name": "moka2popsy",
+  "version": "0.0.1",
+  "description": "Transformation d'un fichier Moka en Popsy",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Proglab/electron.git"
+  },
+  "keywords": [],
+  "author": "Fabrice Gyre",
+  "license": "private",
+  "dependencies": {}
+}
