@@ -19,41 +19,26 @@
   "devDependencies": {
     "asar": "^0.13.0",
     "devtron": "^1.4.0",
+    "electron": "^1.7.6",
     "electron-builder": "^19.24.1",
     "electron-debug": "^1.4.0",
     "electron-packager": "^8.7.2",
-    "xo": "^0.18.2",
-    "electron": "^1.7.6"
+    "xo": "^0.18.2"
   },
   "build": {
-    "appId": "com.proglab.moka2popsy",
-    "dmg": {
-      "contents": [
-        {
-          "x": 110,
-          "y": 150
-        },
-        {
-          "x": 240,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ]
-    },
-    "win": {
-      "target": "nsis",
-      "icon": "build/icon.ico"
-    }
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Proglab",
+        "repo": "electron"
+      }
+    ]
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "electron-is-dev": "^0.3.0",
+    "electron-log": "^2.2.7",
+    "electron-updater": "^2.8.7",
     "jquery": "^3.2.1"
   },
   "xo": {

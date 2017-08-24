@@ -1,5 +1,6 @@
 const electron = require('electron');
 const BrowserWindow = electron.BrowserWindow;
+const app = electron.app;
 
 let Window =  Object.create({
     window: null,
@@ -9,7 +10,8 @@ let Window =  Object.create({
             height: height
         });
 
-        this.window.loadURL(`file://${__dirname}/../view/index.html`);
+        this.window.loadURL(`file://${__dirname}/../view/version.html#v${app.getVersion()}`);
+        //this.window.loadURL(`file://${__dirname}/../view/index.html`);
 
         this.window.on('closed', function() {
             this.window = null;

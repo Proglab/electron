@@ -1,4 +1,4 @@
 node_modules
 .idea
-dist
 app/node_modules
+dist/win-unpacked
