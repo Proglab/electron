@@ -20,14 +20,28 @@
                 <div class="col-sm-3" id="ozze"><img src="../assets/images/logos/ozze.png" class="img-responsive" /></div>
             </div>
             <h2>Choisissez le pays :</h2>
-            <input type="radio" id="town1" name="town" value="Belgique">
+            <input type="radio" id="town1" name="town" value="Belgique" checked>
             <label for="town1">Belgique</label>
             <input type="radio" id="town2" name="town" value="France">
             <label for="town2">France</label><br/>
             <input type="button" id="file" value="Traiter le fichier"/>
+            <footer>
+                <p>version <span id="version"></span></p>
+                <div id="messages"></div>
+            </footer>
         </div>
     <script>
       const $ = jQuery = require('jquery');
+      $('#version').html(window.location.hash.substring(1));
+      const electron = require('electron');
+      const ipc = electron.ipcRenderer;
+      ipc.on('message', function(event, text) {
+          var container = document.getElementById('messages');
+          var message = document.createElement('div');
+          message.innerHTML = text;
+          container.appendChild(message);
+      })
+
     </script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
     <script>
