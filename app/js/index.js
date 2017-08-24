@@ -1,10 +1,12 @@
 const electron = require('electron');
 const ipc = electron.ipcRenderer;
 
-ipc.on('file-opened', function (event, file, content) {
+let File;
+
+ipc.on('file-opened', function (event, args) {
     console.log('Open file');
-    console.log(file);
-    console.log(content);
+    console.log(args.file);
+    console.log(args.content);
 });
 
 $('#azza').click(() => {
@@ -23,4 +25,8 @@ $('#ozze').click(() => {
     $('#ozze').addClass( "active" );
     $('#azza').removeClass( "active" );
     $('#izzy').removeClass( "active" );
+});
+
+$('#file').click(() => {
+    ipc.send('open-file');
 });
