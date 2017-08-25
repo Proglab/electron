@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Electron Updater Example</title>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h3>Mise à jour du programme ... </h3>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" id="progress" style="width: 1%;">
+                1%
+            </div>
+        </div>
+        <div id="messages">Téléchargement de la mise-à-jour...</div>
+    </div>
+</div>
+
+<script>
+
+    const $ = jQuery = require('jquery');
+    const {ipcRenderer} = require('electron');
+    ipcRenderer.on('download-progress', function(event, progressObj) {
+        $('#progress').attr('style', 'width: '+progressObj.percent);
+        $('#progress').attr('aria-valuenow', progressObj.percentValue);
+        $('#progress').html(progressObj.percent);
+        $('#messages').html(progressObj.bytesPerSecond+' (' + progressObj.transferred + '/' + progressObj.total+')');
+    });
+</script>
+</body>
+</html>

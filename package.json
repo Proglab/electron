@@ -7,7 +7,12 @@
     "start": "electron app/main.js",
     "test": "xo",
     "build": "electron-packager app/ --out=dist --asar --overwrite --all",
-    "dist": "build app"
+    "clean": "rm -rf dist",
+    "clean:mac": "rm -rf dist/mac",
+    "clean:win": "rm -rf dist/win",
+    "dist:mac": "npm run clean:mac && build --mac",
+    "dist:win": "npm run clean:win && build --win",
+    "dist": "npm run clean && npm run dist:mac && npm run dist:win"
   },
   "repository": {
     "type": "git",
@@ -26,13 +31,42 @@
     "xo": "^0.18.2"
   },
   "build": {
+    "appId": "com.my.app",
     "publish": [
       {
         "provider": "github",
         "owner": "Proglab",
         "repo": "electron"
       }
-    ]
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "installerHeaderIcon": "build/icon.ico"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "dmg": {
+      "icon": "build/dmg.icns",
+      "contents": [
+        {
+          "x": 345,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 125,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    }
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
@@ -46,5 +80,6 @@
       "node",
       "browser"
     ]
-  }
+  },
+  "release": "build"
 }

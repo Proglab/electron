@@ -15,6 +15,7 @@ let mainWindow;
 // Adds debug features like hotkeys for triggering dev tools and reload
 const Window = require('./class/Window').Window;
 const File = require('./class/File').File;
+const Tools = require('./class/Tools').Tools;
 
 
 // Prevent window being garbage collected
@@ -62,6 +63,7 @@ autoUpdater.on('checking-for-update', () => {
 })
 autoUpdater.on('update-available', (info) => {
     sendStatusToWindow('Update available.');
+    mainWindow.window.webContents.send('update-available');
 })
 autoUpdater.on('update-not-available', (info) => {
     sendStatusToWindow('Update not available.');
@@ -70,20 +72,19 @@ autoUpdater.on('error', (err) => {
     sendStatusToWindow('Error in auto-updater.'+err);
 })
 autoUpdater.on('download-progress', (progressObj) => {
-    let log_message = "Download speed: " + progressObj.bytesPerSecond;
-    log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
-    log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
-    sendStatusToWindow(log_message);
+
+    sendStatusToWindow(Math.round(progressObj.percent)+'%');
+
+    mainWindow.window.webContents.send('download-progress', {
+        'bytesPerSecond': Tools.FileConvertSize(progressObj.bytesPerSecond),
+        'percentValue' : Math.round(progressObj.percent),
+        'percent' : Math.round(progressObj.percent)+'%',
+        'transferred' : Tools.FileConvertSize(progressObj.transferred),
+        'total' : Tools.FileConvertSize(progressObj.total)
+    });
 })
 autoUpdater.on('update-downloaded', (info) => {
-    sendStatusToWindow('Update downloaded; will install in 5 seconds');
-});
-
-autoUpdater.on('update-downloaded', (info) => {
-    // Wait 5 seconds, then quit and install
-    // In your application, you don't need to wait 5 seconds.
-    // You could call autoUpdater.quitAndInstall(); immediately
     setTimeout(function() {
         autoUpdater.quitAndInstall();
-    }, 5000)
-})
+    }, 1000)
+});

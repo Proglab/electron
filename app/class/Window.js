@@ -10,7 +10,7 @@ let Window =  Object.create({
             height: height
         });
 
-        //this.window.loadURL(`file://${__dirname}/../view/version.html#v${app.getVersion()}`);
+        //this.window.loadURL(`file://${__dirname}/../view/update.html#v${app.getVersion()}`);
         this.window.loadURL(`file://${__dirname}/../view/index.html#v${app.getVersion()}`);
 
         this.window.on('closed', function() {

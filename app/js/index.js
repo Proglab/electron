@@ -9,6 +9,10 @@ ipc.on('file-opened', function (event, args) {
     console.log(args.content);
 });
 
+ipc.on('update-available', function (event, args) {
+    window.location.replace("update.html#v${app.getVersion()");
+});
+
 $('#azza').click(() => {
     $('#azza').addClass( "active" );
     $('#izzy').removeClass( "active" );
