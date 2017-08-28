@@ -4,6 +4,9 @@
 /*************************
 *******Typography******
 **************************/
+.active {
+  background-color: #bf4539;
+}
 
 body {
   background: #fff;

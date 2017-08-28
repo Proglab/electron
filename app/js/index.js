@@ -13,22 +13,32 @@ ipc.on('update-available', function (event, args) {
     window.location.replace("update.html#v${app.getVersion()");
 });
 
-$('#azza').click(() => {
-    $('#azza').addClass( "active" );
-    $('#izzy').removeClass( "active" );
-    $('#ozze').removeClass( "active" );
+$('#azzabe').click(() => {
+    $('#azzabe').addClass( "active" );
+    $('#azzafr').removeClass( "active" );
+    $('#ozzebe').removeClass( "active" );
+    $('#ozzefr').removeClass( "active" );
 });
 
-$('#izzy').click(() => {
-    $('#izzy').addClass( "active" );
-    $('#azza').removeClass( "active" );
-    $('#ozze').removeClass( "active" );
+$('#azzafr').click(() => {
+    $('#azzabe').removeClass( "active" );
+    $('#azzafr').addClass( "active" );
+    $('#ozzebe').removeClass( "active" );
+    $('#ozzefr').removeClass( "active" );
 });
 
-$('#ozze').click(() => {
-    $('#ozze').addClass( "active" );
-    $('#azza').removeClass( "active" );
-    $('#izzy').removeClass( "active" );
+$('#ozzebe').click(() => {
+    $('#azzabe').removeClass( "active" );
+    $('#azzafr').removeClass( "active" );
+    $('#ozzebe').addClass( "active" );
+    $('#ozzefr').removeClass( "active" );
+});
+
+$('#ozzefr').click(() => {
+    $('#azzabe').removeClass( "active" );
+    $('#azzafr').removeClass( "active" );
+    $('#ozzebe').removeClass( "active" );
+    $('#ozzefr').addClass( "active" );
 });
 
 $('#file').click(() => {
