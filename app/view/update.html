@@ -4,32 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Electron Updater Example</title>
+    <title>Moka2popsy</title>
     <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/css/main.css" rel="stylesheet">
+    <link href="../assets/css/responsive.css" rel="stylesheet">
 </head>
-<body>
-<div class="container">
-    <div class="jumbotron">
-        <h3>Mise à jour du programme ... </h3>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" id="progress" style="width: 1%;">
-                1%
-            </div>
-        </div>
-        <div id="messages">Téléchargement de la mise-à-jour...</div>
-    </div>
-</div>
+<body class="homepage">
+    <section id="middle">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 wow fadeInDown">
+                    <div class="skill">
+                        <h2>Téléchargement de la mise-à-jour...</h2>
 
-<script>
+                        <div class="progress-wrap">
+                            <h3 id="messages">0 Ko/s (0Ko/OKo)</h3>
+                            <div class="progress">
+                                <div class="progress-bar  color1" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" id="progress">
+                                    <span class="bar-width">0%</span>
+                                </div>
 
-    const $ = jQuery = require('jquery');
-    const {ipcRenderer} = require('electron');
-    ipcRenderer.on('download-progress', function(event, progressObj) {
-        $('#progress').attr('style', 'width: '+progressObj.percent);
-        $('#progress').attr('aria-valuenow', progressObj.percentValue);
-        $('#progress').html(progressObj.percent);
-        $('#messages').html(progressObj.bytesPerSecond+' (' + progressObj.transferred + '/' + progressObj.total+')');
-    });
-</script>
+                            </div>
+                        </div>
+                </div><!--/.col-sm-6-->
+
+            </div><!--/.row-->
+        </div><!--/.container-->
+    </section><!--/#middle-->
+
+
+
+
+
+    <script>
+
+        const $ = jQuery = require('jquery');
+        const {ipcRenderer} = require('electron');
+        ipcRenderer.on('download-progress', function(event, progressObj) {
+            $('#progress').attr('style', 'width: '+progressObj.percent);
+            $('#progress').attr('aria-valuenow', progressObj.percentValue);
+            $('#progress').html(progressObj.percent);
+            $('#messages').html(progressObj.bytesPerSecond+' (' + progressObj.transferred + '/' + progressObj.total+')');
+        });
+    </script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../assets/js/jquery.prettyPhoto.js"></script>
+    <script src="../assets/js/jquery.isotope.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/wow.min.js"></script>
+
+
 </body>
 </html>
