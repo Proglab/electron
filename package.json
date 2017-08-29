@@ -10,8 +10,8 @@
     "clean": "rm -rf dist",
     "clean:mac": "rm -rf dist/mac",
     "clean:win": "rm -rf dist/win",
-    "dist:mac": "npm run clean:mac && build --mac",
-    "dist:win": "npm run clean:win && build --win",
+    "dist:mac": "build --mac",
+    "dist:win": "build --win",
     "dist": "npm run clean && npm run dist:mac && npm run dist:win"
   },
   "repository": {
