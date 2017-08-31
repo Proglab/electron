@@ -48,6 +48,7 @@ app.on('ready', () => {
 });
 
 ipc.on('open-file', function (event) {
+    event.sender.send('file-opening');
     File.window = mainWindow;
     let file = File.open();
     if (file != null)

@@ -11,7 +11,7 @@ let File =  Object.create({
         let files = dialog.showOpenDialog(this.window, {
             properties: ['openFile'],
             filters: [
-                { name: 'Moka File', extensions: ['md'] }
+                { name: 'Moka File', extensions: ['csv'] }
             ]
         });
 
@@ -26,7 +26,7 @@ let File =  Object.create({
             title: 'Save Popsy Output',
             defaultPath: app.getPath('documents'),
             filters: [
-                { name: 'Popsy Files', extensions: ['popsy'] }
+                { name: 'Popsy Files', extensions: ['txt'] }
             ]
         });
 

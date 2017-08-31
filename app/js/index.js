@@ -1,13 +1,14 @@
 const electron = require('electron');
 const ipc = electron.ipcRenderer;
-const csv = require('csv-parser');
-
-let File;
+const parse = require('csv-parse/lib/sync');
 
 ipc.on('file-opened', function (event, args) {
-    console.log('Open file');
-    console.log(args.file);
-    console.log(args.content);
+    let records = parse(args.content, {delimiter: ';',columns: true});
+    console.log(records);
+    let society = $('#society .active').attr('id');
+    console.log(society);
+    Treatment = require('../class/Treatment-'+society).Treatment;
+    Treatment.treat('hello');
 });
 
 ipc.on('update-available', function (event, args) {
@@ -43,5 +44,8 @@ $('#ozzefr').click(() => {
 });
 
 $('#file').click(() => {
-    ipc.send('open-file');
+    $('#myModal').on('shown.bs.modal', function (e) {
+        ipc.send('open-file');
+    })
+    $("#myModal").modal();
 });
