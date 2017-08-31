@@ -74,10 +74,19 @@
           </div>
       </div>
   </section>
-
-
     <script>
-      const $ = jQuery = require('jquery');
+        const $ = jQuery = require('jquery');
+    </script>
+
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script>
+    require('../js/index.js')
+    </script>
+    <script src="../assets/js/jquery.prettyPhoto.js"></script>
+    <script src="../assets/js/jquery.isotope.min.js"></script>
+    <script src="../assets/js/wow.min.js"></script>
+  <script>
       $('#version').html(window.location.hash.substring(1));
       const electron = require('electron');
       const ipc = electron.ipcRenderer;
@@ -88,14 +97,6 @@
           container.appendChild(message);
       })
 
-    </script>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    <script>
-    require('../js/index.js')
-    </script>
-    <script src="../assets/js/jquery.prettyPhoto.js"></script>
-    <script src="../assets/js/jquery.isotope.min.js"></script>
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/wow.min.js"></script>
+  </script>
   </body>
 </html>
