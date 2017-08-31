@@ -29,7 +29,7 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
     if (!mainWindow) {
-        mainWindow = Window.create(800,600);
+        mainWindow = Window.create(900,700);
     }
 });
 
@@ -50,7 +50,10 @@ app.on('ready', () => {
 ipc.on('open-file', function (event) {
     File.window = mainWindow;
     let file = File.open();
-    event.sender.send('file-opened', {file: file.file, content: file.content});
+    if (file != null)
+    {
+        event.sender.send('file-opened', {file: file.file, content: file.content});
+    }
 });
 
 function sendStatusToWindow(text) {
