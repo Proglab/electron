@@ -2,7 +2,7 @@ const electron = require('electron');
 const ipc = electron.ipcRenderer;
 const parse = require('csv-parse/lib/sync');
 const fs = require('fs');
-const File = require('../class/File').File;
+const shell = electron.shell;
 
 ipc.on('file-opened', function (event, args) {
     let records = parse(args.content, {delimiter: ';',columns: true});
@@ -11,10 +11,21 @@ ipc.on('file-opened', function (event, args) {
     console.log(society);
     const Treatment = require('../class/Treatment-'+society).Treatment;
     const contents = Treatment.treat(records);
-    fs.writeFileSync('myfile.txt', contents, 'utf-8');
-    File.window = args.window;
-    File.save(contents);
-    $("#myModal").modal('hide');
+    const date = new Date();
+    const dir = __dirname + '/../files/';
+    const filename = society+'_'+date.getYear()+'-'+ date.getMonth()+'-'+ date.getDay()+ '_'+ date.getHours()+'-'+ date.getMinutes()+'.txt';
+
+
+    fs.writeFile(dir + filename, contents, 'utf8', function (err) {
+        if (err)
+            return console.log(err);
+        console.log(contents);
+        const filename = society+'.txt';
+        console.log(dir + filename);
+        shell.openExternal(dir);
+        $("#myModal").modal('hide');
+    });
+
 });
 
 ipc.on('update-available', function (event, args) {
