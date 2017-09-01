@@ -40,11 +40,6 @@ app.on('ready', () => {
     console.log('The application is ready.');
     mainWindow = Window.create(800,600);
 
-    mainWindow.window.webContents.on('did-finish-load', () => {
-        console.log(File);
-        console.log('HTML is loaded.');
-    });
-
 });
 
 ipc.on('open-file', function (event) {
@@ -53,7 +48,7 @@ ipc.on('open-file', function (event) {
     let file = File.open();
     if (file != null)
     {
-        event.sender.send('file-opened', {file: file.file, content: file.content});
+        event.sender.send('file-opened', {file: file.file, content: file.content,window: mainWindow});
     }
 });
 

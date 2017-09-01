@@ -1,14 +1,20 @@
 const electron = require('electron');
 const ipc = electron.ipcRenderer;
 const parse = require('csv-parse/lib/sync');
+const fs = require('fs');
+const File = require('../class/File').File;
 
 ipc.on('file-opened', function (event, args) {
     let records = parse(args.content, {delimiter: ';',columns: true});
     console.log(records);
     let society = $('#society .active').attr('id');
     console.log(society);
-    Treatment = require('../class/Treatment-'+society).Treatment;
-    Treatment.treat('hello');
+    const Treatment = require('../class/Treatment-'+society).Treatment;
+    const contents = Treatment.treat(records);
+    fs.writeFileSync('myfile.txt', contents, 'utf-8');
+    File.window = args.window;
+    File.save(contents);
+    $("#myModal").modal('hide');
 });
 
 ipc.on('update-available', function (event, args) {

@@ -1,6 +1,6 @@
 let Treatment =  Object.create({
     treat:  (text) => {
-        alert(text + ' from belgium');
+        return text;
     }
 });
 module.exports.Treatment = Treatment;

@@ -1,13 +1,14 @@
 const electron = require('electron');
 const app = electron.app;
-const dialog = electron.dialog;
 const fs = require('fs');
+const dialog = electron.dialog;
 
 let File =  Object.create({
     file: null,
     content:null,
     window:null,
     open: () => {
+
         let files = dialog.showOpenDialog(this.window, {
             properties: ['openFile'],
             filters: [
@@ -22,9 +23,9 @@ let File =  Object.create({
         return this;
     },
     save: (content) => {
+
         let fileName = dialog.showSaveDialog(this.window, {
             title: 'Save Popsy Output',
-            defaultPath: app.getPath('documents'),
             filters: [
                 { name: 'Popsy Files', extensions: ['txt'] }
             ]
