@@ -9,7 +9,12 @@ ipc.on('file-opened', function (event, args) {
     console.log(records);
     let society = $('#society .active').attr('id');
     console.log(society);
-    const Treatment = require('../class/Treatment-'+society).Treatment;
+    let Treatment = require('../class/Treatment-'+society).Treatment;
+
+
+    console.log(Treatment);
+
+
     const contents = Treatment.treat(records);
     const date = new Date();
     const dir = __dirname + '/../files/';
