@@ -1,54 +1,14 @@
 const fs = require('fs');
 const path = require('path');
-const params = {
-    701000: {
-        tva:0,
-        facture:701000,
-
-    },
-    701005: {
-        tva:21,
-        facture:701005,
-
-    },
-    701060: {
-        tva:6,
-        facture:701000,
-
-    },
-    701210: {
-        tva:21,
-        facture:701000,
-
-    },
-    70700000: {
-        tva:0,
-        facture:70700000,
-    },
-    70700055: {
-        tva:5.5,
-        facture:70700000,
-    },
-    70700100: {
-        tva:10,
-        facture:70700000,
-    },
-    70700200: {
-        tva:20,
-        facture:70700000,
-    },
-    70852000: {
-        tva:20,
-        facture:70852000,
-    }
-};
+const params = require('../config/tvafact');
+const azzafr = require('../config/azzafr');
 
 class Treatment {
     constructor() {
-        this.CreateKeyAll= 'Y';
-        this.IgnoreAnalClosed= 'Y';
-        this.DossierSelect= '512';
-        this.AcctingSelect= '05';
+        this.CreateKeyAll= azzafr.CreateKeyAll;
+        this.IgnoreAnalClosed= azzafr.IgnoreAnalClosed;
+        this.DossierSelect= azzafr.DossierSelect;
+        this.AcctingSelect= azzafr.AcctingSelect;
     }
 
     treat(text) {
