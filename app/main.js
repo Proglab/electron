@@ -29,7 +29,7 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
     if (!mainWindow) {
-        mainWindow = Window.create(900,700);
+        mainWindow = Window.create(800,750);
     }
 });
 
@@ -38,7 +38,7 @@ app.on('ready', () => {
         autoUpdater.checkForUpdates();
     }
     console.log('The application is ready.');
-    mainWindow = Window.create(800,600);
+    mainWindow = Window.create(800,750);
 
 });
 

@@ -7,7 +7,9 @@ let Window =  Object.create({
     create: (width, height) => {
         this.window = new BrowserWindow({
             width: width,
-            height: height
+            height: height,
+            resizable: false,
+            frame: false
         });
 
         //this.window.loadURL(`file://${__dirname}/../view/update.html#v${app.getVersion()}`);
