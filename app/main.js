@@ -38,7 +38,7 @@ app.on('ready', () => {
         autoUpdater.checkForUpdates();
     }
     console.log('The application is ready.');
-    mainWindow = Window.create(800,750);
+    mainWindow = Window.create(800,800);
 
 });
 
