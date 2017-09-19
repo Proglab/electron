@@ -79,6 +79,8 @@ class Treatment {
 
                 let FlagDC = value.Debit == 0 ? 'C' : 'D';
                 let VATCode = params[value.Compte].tva;
+                let VATCode_TXT = params[value.Compte].tva_txt;
+
                 let GnrlID = params[value.Compte].facture;
 
                 sum = FlagDC == 'C' ? parseFloat(sum) + parseFloat(parseFloat(value.Credit.replace(',', '.')).toFixed(2)) : parseFloat(sum) + parseFloat(parseFloat(value.Debit.replace(',', '.')).toFixed(2));
@@ -86,7 +88,7 @@ class Treatment {
 
                 let line =  lineTemplate.replace('[[GnrlID]]', GnrlID);
                 line =  line.replace('[[AnalID]]', '');
-                line =  line.replace('[[VATCode]]', VATCode);
+                line =  line.replace('[[VATCode]]', VATCode_TXT);
                 line =  line.replace('[[Comment]]', value.Libelle);
                 line =  line.replace('[[FlagDC]]', FlagDC);
                 line =  line.replace('[[CrcyID]]', 'EUR');
