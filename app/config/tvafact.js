@@ -1,22 +1,22 @@
 const config = {
     '701I05': {
-        tva_txt:0,
-        tva:'I0',
+        tva_txt:'I0',
+        tva:0,
         facture:701005,
     },
     '701X05': {
-        tva_txt:0,
-        tva:'X0',
+        tva_txt:'X0',
+        tva:0,
         facture:701005,
     },
     '701I00': {
-        tva_txt:0,
-        tva:'I0',
+        tva_txt:'I0',
+        tva:0,
         facture:701000,
     },
     '701X00': {
-        tva_txt:0,
-        tva:'X0',
+        tva_txt:'X0',
+        tva:0,
         facture:701000,
     },
     701000: {

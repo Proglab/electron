@@ -38,7 +38,7 @@ class Treatment {
 
         $.each(text, function(index, value ) {
 
-            if (!$.isNumeric(value.Compte))
+            if (value.CompteTiers != '')
             {
                 if (i!=0 && value.NumPiece != oldNumPiece)
                 {

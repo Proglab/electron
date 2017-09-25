@@ -1,8 +1,11 @@
 const electron = require('electron');
+const remote = electron.remote;
+var dialog = remote.dialog;
 const ipc = electron.ipcRenderer;
 const parse = require('csv-parse/lib/sync');
 const fs = require('fs');
 const shell = electron.shell;
+const path = require('path');
 
 ipc.on('file-opened', function (event, args) {
     let records = parse(args.content, {delimiter: ';',columns: true});
@@ -17,19 +20,33 @@ ipc.on('file-opened', function (event, args) {
 
     const contents = Treatment.treat(records);
     const date = new Date();
-    const dir = __dirname + '/../files/';
+    const dir = './';
     const filename = society+'_'+date.getYear()+'-'+ date.getMonth()+'-'+ date.getDay()+ '_'+ date.getHours()+'-'+ date.getMinutes()+'.txt';
 
 
-    fs.writeFile(dir + filename, contents, 'utf8', function (err) {
-        if (err)
-            return console.log(err);
-        console.log(contents);
-        const filename = society+'.txt';
-        console.log(dir + filename);
-        shell.openExternal(dir);
-        $("#myModal").modal('hide');
+    console.log('Saving Popsy file');
+    dialog.showSaveDialog(remote.getCurrentWindow(), {
+        title: 'Enregistrez le fichier Popsy',
+        defaultPath: filename,
+        filters: [
+            {name: 'Fichier Popsy', extensions: ['txt']}
+        ]
+    }, function (fileName) {
+        console.log('callback');
+        console.log(fileName);
+
+        if (fileName === undefined) return;
+        fs.writeFile(fileName, contents, 'utf8', function (err) {
+            if (err)
+                return console.log(err);
+            shell.openExternal(path.dirname(fileName));
+            $("#myModal").modal('hide');
+        });
+
     });
+
+
+
 
 });
 

@@ -38,7 +38,7 @@ class Treatment {
 
         $.each(text, function(index, value ) {
 
-            if (!$.isNumeric(value.Compte))
+            if (value.CompteTiers != '')
             {
                 if (i!=0 && value.NumPiece != oldNumPiece)
                 {
@@ -54,7 +54,7 @@ class Treatment {
                 console.log(headTemplate);
                 body += "Sales:\r\n{\r\n";
 
-                const date = value.Date.split('-');
+                const date = value.Date.split('/');
 
 
                 let head =  headTemplate.replace('[[JrnlID]]', value.Libelle.indexOf("AVOIR") == 0 ? 'FV1' : 'FV4');
@@ -79,6 +79,14 @@ class Treatment {
 
                 let FlagDC = value.Debit == 0 ? 'C' : 'D';
                 let VATCode = params[value.Compte].tva;
+
+                if (!$.isNumeric(VATCode))
+                {
+                    alert(VATCode);
+                    alert(JSON.stringify(params[value.Compte]));
+                }
+
+
                 let VATCode_TXT = params[value.Compte].tva_txt;
 
                 let GnrlID = params[value.Compte].facture;

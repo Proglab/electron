@@ -62,9 +62,9 @@ class Treatment {
                 const date = dateStr.split('-');
 
 
-                let head =  headTemplate.replace('[[JrnlID]]', value.Libelle.indexOf("AVOIR") == 0 ? 'FV1' : 'FV4');
+                let head =  headTemplate.replace('[[JrnlID]]', value.Libelle.indexOf("AVOIR") == 0 ? 'FV5' : 'FV4');
                 head =  head.replace('[[DocType]]', 1);
-                head =  head.replace('[[DocNumber]]', value.NumPiece.replace('FF', '10').replace('AF', '11'));
+                head =  head.replace('[[DocNumber]]', value.NumPiece.replace('FF', '10').replace('AF', '20'));
                 head =  head.replace('[[CustID]]', value.CompteTiers.replace('AZ_', ''));
                 head =  head.replace('[[Comment]]', value.Libelle);
                 head =  head.replace('[[PeriodID]]', parseInt(date[1]));
