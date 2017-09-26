@@ -1,141 +1,188 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Moka2popsy</title>
-      <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-      <link href="../assets/css/main.css" rel="stylesheet">
-      <link href="../assets/css/responsive.css" rel="stylesheet">
-      <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
-  </head>
-  <body>
-  <header id="header">
-      <div class="top-bar">
-          <div class="container">
-              <div class="row">
-                  <div class="col-sm-6 col-xs-4">
-                      <div class="top-number"><p><span id="version"></span></p></div>
-                  </div>
-                  <div class="col-sm-6 col-xs-8">
-                      <div class="social">
-                          <ul class="social-share">
-                              <li><a href="#" id="close"><i class="fa fa-times"></i></a></li>
-                          </ul>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/css/main.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/responsive.css" rel="stylesheet">
+    <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<header id="header">
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-xs-4">
+                    <div class="top-number"><p><span id="version"></span></p></div>
+                </div>
+                <div class="col-sm-6 col-xs-8">
+                    <div class="social">
+                        <ul class="social-share">
+                            <li><a href="#" id="close"><i class="fa fa-times"></i></a></li>
+                        </ul>
 
-                      </div>
-                  </div>
-              </div>
-          </div><!--/.container-->
-      </div><!--/.top-bar-->
-  </header>
-  <section>
-<div class="container">
-
-
-
-      <div class="row" id="society">
-          <div class="row center" id="title">
-              <h2>Facturation</h2>
-          </div>
-          <div class="col-xs-12 col-sm-3 active" id="azzabe" style="padding: 5px">
-              <div class="recent-work-wrap">
-                  <img class="img-responsive" src="../assets/images/logos/azza_be.png" alt="" height="200">
-                  <div class="overlay">
-                      <div class="recent-work-inner">
-                          <h3><a href="#">Azza Belgique</a> </h3>
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-          <div class="col-xs-12 col-sm-3" id="azzafr" style="padding: 5px">
-              <div class="recent-work-wrap">
-                  <img class="img-responsive" src="../assets/images/logos/azza_fr.png" alt="" height="200">
-                  <div class="overlay">
-                      <div class="recent-work-inner">
-                          <h3><a href="#">Azza France</a></h3>
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-          <div class="col-xs-12 col-sm-3" id="ozzebe" style="padding: 5px">
-              <div class="recent-work-wrap">
-                  <img class="img-responsive" src="../assets/images/logos/ozze_be.png" alt="" height="200">
-                  <div class="overlay">
-                      <div class="recent-work-inner">
-                          <h3><a href="#">Ozze Belgique</a></h3>
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-          <div class="col-xs-12 col-sm-3" id="ozzefr" style="padding: 5px">
-              <div class="recent-work-wrap">
-                  <img class="img-responsive" src="../assets/images/logos/ozze_fr.png" alt="" height="200">
-                  <div class="overlay">
-                      <div class="recent-work-inner">
-                          <h3><a href="#">Ozze France</a></h3>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div><!--/.row-->
-
-      <div class="modal fade" id="myModal" role="dialog">
-          <div class="modal-dialog">
-              <!-- Modal content-->
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Transformation en cours</h4>
-                  </div>
-                  <div class="modal-body">
-                      <p>Traitement ... Veuillez patienter</p>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="row" style="margin-top: 5em">
-          <div class="form-group center">
-              <input type="button" class="btn btn-primary btn-lg" id="file" value="Traiter le fichier"/>
-          </div>
-      </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/.container-->
+    </div><!--/.top-bar-->
+</header>
+<section id="homepage">
+    <div class="container">
 
 
-  </div>
-  </section>
-    <script>
-        const $ = jQuery = require('jquery');
-    </script>
+        <div class="row" id="society">
+            <div class="center title">
+                <h2>Facturation</h2>
+            </div>
+            <div class="col-xs-12 col-sm-3 active treatment" id="azzabe" style="padding: 5px">
+                <div class="recent-work-wrap">
+                    <img class="img-responsive" src="../assets/images/logos/azza_be.png" alt="" height="200">
+                    <div class="overlay">
+                        <div class="recent-work-inner">
+                            <h3><a href="#">Azza Belgique</a></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-3 treatment" id="azzafr" style="padding: 5px">
+                <div class="recent-work-wrap">
+                    <img class="img-responsive" src="../assets/images/logos/azza_fr.png" alt="" height="200">
+                    <div class="overlay">
+                        <div class="recent-work-inner">
+                            <h3><a href="#">Azza France</a></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-3 treatment" id="ozzebe" style="padding: 5px">
+                <div class="recent-work-wrap">
+                    <img class="img-responsive" src="../assets/images/logos/ozze_be.png" alt="" height="200">
+                    <div class="overlay">
+                        <div class="recent-work-inner">
+                            <h3><a href="#">Ozze Belgique</a></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-3 treatment" id="ozzefr" style="padding: 5px">
+                <div class="recent-work-wrap">
+                    <img class="img-responsive" src="../assets/images/logos/ozze_fr.png" alt="" height="200">
+                    <div class="overlay">
+                        <div class="recent-work-inner">
+                            <h3><a href="#">Ozze France</a></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="center title">
+                <h2>Commission</h2>
+            </div>
+            <div class="col-xs-12 col-sm-3 treatment" id="azzabecom" style="padding: 5px">
+                <div class="recent-work-wrap">
+                    <img class="img-responsive" src="../assets/images/logos/azza_be.png" alt="" height="200">
+                    <div class="overlay">
+                        <div class="recent-work-inner">
+                            <h3><a href="#">Azza Belgique</a></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-3 treatment" id="azzafrcom" style="padding: 5px">
+                <div class="recent-work-wrap">
+                    <img class="img-responsive" src="../assets/images/logos/azza_fr.png" alt="" height="200">
+                    <div class="overlay">
+                        <div class="recent-work-inner">
+                            <h3><a href="#">Azza France</a></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-3 treatment" id="ozzebecom" style="padding: 5px">
+                <div class="recent-work-wrap">
+                    <img class="img-responsive" src="../assets/images/logos/ozze_be.png" alt="" height="200">
+                    <div class="overlay">
+                        <div class="recent-work-inner">
+                            <h3><a href="#">Ozze Belgique</a></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-3 treatment" id="ozzefrcom" style="padding: 5px">
+                <div class="recent-work-wrap">
+                    <img class="img-responsive" src="../assets/images/logos/ozze_fr.png" alt="" height="200">
+                    <div class="overlay">
+                        <div class="recent-work-inner">
+                            <h3><a href="#">Ozze France</a></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/.row-->
+
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Transformation en cours</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Traitement ... Veuillez patienter</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 30px">
+            <div class="form-group center">
+                <input type="button" class="btn btn-primary btn-lg" id="file" value="Traiter le fichier"/>
+            </div>
+        </div>
 
 
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    <script>
+    </div>
+</section>
+<script>
+    const $ = jQuery = require('jquery');
+</script>
+
+
+<script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+<script>
     require('../js/index.js')
-    </script>
-    <script src="../assets/js/jquery.prettyPhoto.js"></script>
-    <script src="../assets/js/jquery.isotope.min.js"></script>
-    <script src="../assets/js/wow.min.js"></script>
-  <script>
-      $('#version').html(window.location.hash.substring(1));
-      const electron = require('electron');
-      const ipc = electron.ipcRenderer;
-      ipc.on('message', function(event, text) {
-          var container = document.getElementById('messages');
-          var message = document.createElement('div');
-          message.innerHTML = text;
-          container.appendChild(message);
-      })
+</script>
+<script src="../assets/js/jquery.prettyPhoto.js"></script>
+<script src="../assets/js/jquery.isotope.min.js"></script>
+<script src="../assets/js/wow.min.js"></script>
+<script>
+    $('#version').html(window.location.hash.substring(1));
+    const electron = require('electron');
+    const ipc = electron.ipcRenderer;
+    ipc.on('message', function (event, text) {
+        var container = document.getElementById('messages');
+        var message = document.createElement('div');
+        message.innerHTML = text;
+        container.appendChild(message);
+    })
 
-      $('#close').click(function() {
-          const remote = require('electron').remote;
-          var window = remote.getCurrentWindow();
-          window.close();
-      });
+    $('#close').click(function () {
+        const remote = require('electron').remote;
+        var window = remote.getCurrentWindow();
+        window.close();
+    });
 
-  </script>
-  </body>
+</script>
+</body>
 </html>

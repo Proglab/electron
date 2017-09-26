@@ -20,7 +20,6 @@ ipc.on('file-opened', function (event, args) {
 
     const contents = Treatment.treat(records);
     const date = new Date();
-    const dir = './';
     const filename = society+'_'+date.getYear()+'-'+ date.getMonth()+'-'+ date.getDay()+ '_'+ date.getHours()+'-'+ date.getMinutes()+'.txt';
 
 
@@ -54,32 +53,9 @@ ipc.on('update-available', function (event, args) {
     window.location.replace("update.html#v${app.getVersion()");
 });
 
-$('#azzabe').click(() => {
-    $('#azzabe').addClass( "active" );
-    $('#azzafr').removeClass( "active" );
-    $('#ozzebe').removeClass( "active" );
-    $('#ozzefr').removeClass( "active" );
-});
-
-$('#azzafr').click(() => {
-    $('#azzabe').removeClass( "active" );
-    $('#azzafr').addClass( "active" );
-    $('#ozzebe').removeClass( "active" );
-    $('#ozzefr').removeClass( "active" );
-});
-
-$('#ozzebe').click(() => {
-    $('#azzabe').removeClass( "active" );
-    $('#azzafr').removeClass( "active" );
-    $('#ozzebe').addClass( "active" );
-    $('#ozzefr').removeClass( "active" );
-});
-
-$('#ozzefr').click(() => {
-    $('#azzabe').removeClass( "active" );
-    $('#azzafr').removeClass( "active" );
-    $('#ozzebe').removeClass( "active" );
-    $('#ozzefr').addClass( "active" );
+$('.treatment').click((event) => {
+    $('.treatment').removeClass( "active" );
+    $(event.currentTarget).addClass( "active" );
 });
 
 $('#file').click(() => {
