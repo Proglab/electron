@@ -61,13 +61,16 @@ $('.treatment').click((event) => {
 
 
 var i = 0;
+var sendEvent = function (e) {
+    ipc.send('open-file');
+    $('#myModal').off('shown.bs.modal', sendEvent);
+
+};
+
+
 $('#file').click(() => {
-    if (i == 0)
-    {
-        $('#myModal').on('shown.bs.modal', function (e) {
-            ipc.send('open-file');
-        });
-        i++;
-    }
+    $('#myModal').on('shown.bs.modal', sendEvent);
+
+
     $("#myModal").modal();
 });
