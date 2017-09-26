@@ -8,7 +8,9 @@ class Treatment {
         this.CreateKeyAll= azzabe.CreateKeyAll;
         this.IgnoreAnalClosed= azzabe.IgnoreAnalClosed;
         this.DossierSelect= azzabe.DossierSelect;
-        this.AcctingSelect= azzabe.AcctingSelect;
+        var now = new Date();
+        var annee   = now.getFullYear() - 2012;
+        this.AcctingSelect= annee < 10 ? '0'+annee : annee;
     }
 
     treat(text) {

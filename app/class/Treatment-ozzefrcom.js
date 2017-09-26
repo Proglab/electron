@@ -1,16 +1,14 @@
 const fs = require('fs');
 const path = require('path');
-const params = require('../config/tvafact');
-const ozzefr = require('../config/ozzefr');
+const params = require('../config/tvacom');
+const azzafr = require('../config/azzafrcom');
 
 class Treatment {
     constructor() {
-        this.CreateKeyAll= ozzefr.CreateKeyAll;
-        this.IgnoreAnalClosed= ozzefr.IgnoreAnalClosed;
-        this.DossierSelect= ozzefr.DossierSelect;
-        var now = new Date();
-        var annee   = now.getFullYear() - 2002;
-        this.AcctingSelect= annee < 10 ? '0'+annee : annee;
+        this.CreateKeyAll= azzafr.CreateKeyAll;
+        this.IgnoreAnalClosed= azzafr.IgnoreAnalClosed;
+        this.DossierSelect= azzafr.DossierSelect;
+        this.AcctingSelect= azzafr.AcctingSelect;
     }
 
     treat(text) {
@@ -40,21 +38,14 @@ class Treatment {
 
         $.each(text, function(index, value ) {
 
-            if (!$.isNumeric(value.Compte))
+            if (value.CompteGeneral != '')
             {
-                if (i!=0 && value.NumPiece != oldNumPiece)
-                {
-                    body = body.replace('[[AmountCrcyDoc]]', parseFloat(sum).toFixed(2));
-                    sum=0;
-                }
-                oldNumPiece = value.NumPiece;
-
                 if (i > 0)
                 {
                     body += "\r\n}\r\n";
                 }
                 console.log(headTemplate);
-                body += "Sales:\r\n{\r\n";
+                body += "Purchases:\r\n{\r\n";
 
                 const dateStr = value.Date.replace('/', '-').replace('/', '-').replace('2017', '17');
                 const dateEchStr = value.DateEcheance.replace('/', '-').replace('/', '-').replace('2017', '17');
@@ -63,19 +54,19 @@ class Treatment {
 
                 const date = dateStr.split('-');
 
-
-                let head =  headTemplate.replace('[[JrnlID]]', value.Libelle.indexOf("AVOIR") == 0 ? 'FV5' : 'FV4');
+                let head =  headTemplate.replace('[[JrnlID]]', 'PRE');
                 head =  head.replace('[[DocType]]', 1);
-                head =  head.replace('[[DocNumber]]', value.NumPiece.replace('FF', '10').replace('AF', '20'));
-                head =  head.replace('[[CustID]]', value.CompteTiers.replace('AZ_', ''));
-                head =  head.replace('[[Comment]]', value.Libelle);
+                head =  head.replace('[[DocNumber]]', value.NumPiece.replace('FF', '10').replace('AF', '11'));
+                //head =  head.replace('[[SuppID]]', value.Compte);
+                head =  head.replace('[[Comment]]', value.Libelle + ' ' + parseInt(date[1]) + '/' + parseInt(date[2]));
                 head =  head.replace('[[PeriodID]]', parseInt(date[1]));
                 head =  head.replace('[[DateDoc]]',dateStr+' 00:00:00');
-                head =  head.replace('[[DateDue]]', dateEchStr == '' ? dateStr +' 00:00:00' : dateEchStr + ' 00:00:00');
+                head =  head.replace('[[DateDue]]', dateStr+' 00:00:00');
                 head =  head.replace('[[Piece]]', '');
                 head =  head.replace('[[CrcyDoc]]', "EUR");
-                //head =  head.replace('[[AmountCrcyDoc]]', parseFloat(value.Debit.replace(',', '.')).toFixed(2));
+                head =  head.replace('[[AmountCrcyDoc]]', parseFloat(value.Credit.replace(',', '.')).toFixed(2));
                 body += head;
+
             }
             else
             {

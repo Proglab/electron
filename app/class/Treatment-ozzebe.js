@@ -1,14 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 const params = require('../config/tvafact');
-const azzafr = require('../config/azzafr');
+const ozzebe = require('../config/ozzebe');
 
 class Treatment {
     constructor() {
-        this.CreateKeyAll= azzafr.CreateKeyAll;
-        this.IgnoreAnalClosed= azzafr.IgnoreAnalClosed;
-        this.DossierSelect= azzafr.DossierSelect;
-        this.AcctingSelect= azzafr.AcctingSelect;
+        this.CreateKeyAll= ozzebe.CreateKeyAll;
+        this.IgnoreAnalClosed= ozzebe.IgnoreAnalClosed;
+        this.DossierSelect= ozzebe.DossierSelect;
+        var now = new Date();
+        var annee   = now.getFullYear() - 2006;
+        this.AcctingSelect= annee < 10 ? '0'+annee : annee;
     }
 
     treat(text) {
