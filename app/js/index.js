@@ -55,12 +55,19 @@ ipc.on('update-available', function (event, args) {
 
 $('.treatment').click((event) => {
     $('.treatment').removeClass( "active" );
+    console.log(event.currentTarget);
     $(event.currentTarget).addClass( "active" );
 });
 
+
+var i = 0;
 $('#file').click(() => {
-    $('#myModal').on('shown.bs.modal', function (e) {
-        ipc.send('open-file');
-    })
+    if (i == 0)
+    {
+        $('#myModal').on('shown.bs.modal', function (e) {
+            ipc.send('open-file');
+        });
+        i++;
+    }
     $("#myModal").modal();
 });

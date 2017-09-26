@@ -42,14 +42,13 @@ app.on('ready', () => {
 
 });
 
-ipc.once('open-file', function (event) {
-    event.sender.send('file-opening');
-    File.window = mainWindow;
+ipc.on('open-file', function (event) {
     let file = File.open();
     if (file != null)
     {
         event.sender.send('file-opened', {file: file.file, content: file.content,window: mainWindow});
     }
+    console.log(event);
 });
 
 function sendStatusToWindow(text) {
