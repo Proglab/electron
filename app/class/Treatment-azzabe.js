@@ -8,9 +8,6 @@ class Treatment {
         this.CreateKeyAll= azzabe.CreateKeyAll;
         this.IgnoreAnalClosed= azzabe.IgnoreAnalClosed;
         this.DossierSelect= azzabe.DossierSelect;
-        var now = new Date();
-        var annee   = now.getFullYear() - 2012;
-        this.AcctingSelect= annee < 10 ? '0'+annee : annee;
     }
 
     treat(text) {
@@ -20,7 +17,6 @@ class Treatment {
         txtTransformed = txtTransformed.replace('[[CreateKeyAll]]', this.CreateKeyAll);
         txtTransformed = txtTransformed.replace('[[IgnoreAnalClosed]]', this.IgnoreAnalClosed);
         txtTransformed = txtTransformed.replace('[[DossierSelect]]', this.DossierSelect);
-        txtTransformed = txtTransformed.replace('[[AcctingSelect]]', this.AcctingSelect);
         this.template = txtTransformed;
 
 
@@ -37,6 +33,8 @@ class Treatment {
 
         var sum=0;
         var oldNumPiece = null;
+
+        var dateYear = null;
 
         $.each(text, function(index, value ) {
 
@@ -57,6 +55,11 @@ class Treatment {
                 body += "Sales:\r\n{\r\n";
 
                 const date = value.Date.split('/');
+
+                if (dateYear == null)
+                {
+                    dateYear = date[2];
+                }
 
 
                 let head =  headTemplate.replace('[[JrnlID]]', value.Libelle.indexOf("AVOIR") == 0 ? 'FV1' : 'FV4');
@@ -117,6 +120,12 @@ class Treatment {
         body = body.replace('[[AmountCrcyDoc]]', parseFloat(sum).toFixed(2));
         body += '}';
         console.log('Transformation ending...');
+
+        console.log('dateYear' + dateYear);
+
+        var aactingselect = dateYear - 2012;
+        this.template = this.template.replace('[[AcctingSelect]]', aactingselect < 10 ? '0'+aactingselect : aactingselect);
+
         return this.template+body;
     }
 
