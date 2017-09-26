@@ -1,6 +1,6 @@
 {
   "name": "moka2popsy",
-  "version": "0.0.7",
+  "version": "0.0.6",
   "description": "Transformation d'un fichier Moka en Popsy",
   "main": "main.js",
   "repository": {
