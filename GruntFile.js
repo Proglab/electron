@@ -40,7 +40,7 @@ module.exports = function (grunt) {
         },
         "github-release": {
             options: {
-                repository: 'absolute-fx/Imoges_app', // Path to repository
+                repository: 'proglab/electron', // Path to repository
                 auth: {   // Auth credentials
                     user: '<%= gitaccount.login %>',
                     password: '<%= gitaccount.pass %>'
