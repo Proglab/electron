@@ -1,6 +1,6 @@
 {
   "name": "moka2popsy",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Transformation d'un fichier Moka en Popsy",
   "main": "main.js",
   "scripts": {
@@ -34,7 +34,6 @@
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-jshint": "^2.0.0",
     "grunt-git": "^1.0.10",
-    "grunt-github-releaser": "^0.1.18",
     "grunt-version": "^1.2.1",
     "xo": "^0.18.2"
   },
