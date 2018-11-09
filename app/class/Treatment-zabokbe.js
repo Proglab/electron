@@ -1,13 +1,13 @@
 const fs = require('fs');
 const path = require('path');
-const params = require('../config/tvafactozzebe');
-const ozzebe = require('../config/ozzebe');
+const params = require('../config/tvafactzabokbe');
+const zabokbe = require('../config/zabokbe');
 
 class Treatment {
     constructor() {
-        this.CreateKeyAll= ozzebe.CreateKeyAll;
-        this.IgnoreAnalClosed= ozzebe.IgnoreAnalClosed;
-        this.DossierSelect= ozzebe.DossierSelect;
+        this.CreateKeyAll= zabokbe.CreateKeyAll;
+        this.IgnoreAnalClosed= zabokbe.IgnoreAnalClosed;
+        this.DossierSelect= zabokbe.DossierSelect;
     }
 
     treat(text) {
@@ -88,6 +88,10 @@ class Treatment {
                 }
 
                 let FlagDC = value.Debit == 0 ? 'C' : 'D';
+
+                console.log(value);
+
+
                 let VATCode = params[value.Compte].tva;
                 let GnrlID = params[value.Compte].facture;
 

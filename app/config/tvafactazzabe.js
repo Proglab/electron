@@ -92,6 +92,11 @@ const config = {
         tva_txt:0,
         tva:0,
         facture:7070000,
-    }
+    },
+    7001: {
+        tva_txt:21,
+        tva:21,
+        facture:7001,
+    },
 }
 module.exports = config;

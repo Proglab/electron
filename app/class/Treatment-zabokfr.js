@@ -1,13 +1,13 @@
 const fs = require('fs');
 const path = require('path');
-const params = require('../config/tvafactozzebe');
-const ozzebe = require('../config/ozzebe');
+const params = require('../config/tvafactzabokfr');
+const zabokbe = require('../config/zabokfr');
 
 class Treatment {
     constructor() {
-        this.CreateKeyAll= ozzebe.CreateKeyAll;
-        this.IgnoreAnalClosed= ozzebe.IgnoreAnalClosed;
-        this.DossierSelect= ozzebe.DossierSelect;
+        this.CreateKeyAll= zabokbe.CreateKeyAll;
+        this.IgnoreAnalClosed= zabokbe.IgnoreAnalClosed;
+        this.DossierSelect= zabokbe.DossierSelect;
     }
 
     treat(text) {
@@ -69,7 +69,7 @@ class Treatment {
 
                 let head =  headTemplate.replace('[[JrnlID]]', value.Libelle.indexOf("AVOIR") == 0 ? 'FV1' : 'FV4');
                 head =  head.replace('[[DocType]]', 1);
-                head =  head.replace('[[DocNumber]]', value.NumPiece.replace('FB', '20').replace('AB', '12'));
+                head =  head.replace('[[DocNumber]]', value.NumPiece.replace('FF', '10').replace('AF', '11'));
                 head =  head.replace('[[CustID]]', value.CompteTiers.replace('AZ_', ''));
                 head =  head.replace('[[Comment]]', value.Libelle);
                 head =  head.replace('[[PeriodID]]', parseInt(date[1]));
@@ -88,6 +88,10 @@ class Treatment {
                 }
 
                 let FlagDC = value.Debit == 0 ? 'C' : 'D';
+
+                console.log(value);
+
+
                 let VATCode = params[value.Compte].tva;
                 let GnrlID = params[value.Compte].facture;
 

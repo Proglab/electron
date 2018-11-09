@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const params = require('../config/tvafact');
+const params = require('../config/tvafactazzafr');
 const azzafr = require('../config/azzafr');
 
 class Treatment {
