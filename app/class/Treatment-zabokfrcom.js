@@ -1,14 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 const params = require('../config/tvacom');
-const azzafrcom = require('../config/azzafrcom');
+const zabokfrcom = require('../config/zabokfrcom');
 
 class Treatment {
     constructor() {
-        this.CreateKeyAll= azzafrcom.CreateKeyAll;
-        this.IgnoreAnalClosed= azzafrcom.IgnoreAnalClosed;
-        this.DossierSelect= azzafrcom.DossierSelect;
-        this.AcctingSelect= azzafrcom.AcctingSelect;
+        this.CreateKeyAll= zabokfrcom.CreateKeyAll;
+        this.IgnoreAnalClosed= zabokfrcom.IgnoreAnalClosed;
+        this.DossierSelect= zabokfrcom.DossierSelect;
+        this.AcctingSelect= zabokfrcom.AcctingSelect;
     }
 
     treat(text) {
