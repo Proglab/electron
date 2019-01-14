@@ -51,6 +51,10 @@ class Treatment {
             {
                 num = '0' + i;
             }
+            else if (i < 9999)
+            {
+                num = i;
+            }
 
             const dateStr = value.Date;
             const date = dateStr.split('/');
