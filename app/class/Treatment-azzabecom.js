@@ -56,7 +56,7 @@ class Treatment {
             const date = dateStr.split('/');
 
 
-            if (value.CompteGeneral == '622200')
+            if (value.CompteGeneral == '613222')
             {
                 if (i > 0)
                 {
@@ -73,7 +73,7 @@ class Treatment {
                 head =  head.replace('[[DateDue]]', dateStr+' 00:00:00');
                 head =  head.replace('[[Piece]]', '');
                 head =  head.replace('[[CrcyDoc]]', "EUR");
-                //head =  head.replace('[[AmountCrcyDoc]]', parseFloat(value.Debit.replace(',', '.')).toFixed(2));
+                head =  head.replace('[[AmountCrcyDoc]]', parseFloat(value.Debit.replace(',', '.')).toFixed(2));
                 body += head;
                 oldNumPiece = value.Compte;
 
