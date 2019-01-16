@@ -1,7 +1,7 @@
 let config = {
     'CreateKeyAll': 'Y',
     'IgnoreAnalClosed': 'Y',
-    'DossierSelect': '312',
+    'DossierSelect': '513',
     'AcctingSelect': '15'
 };
 module.exports = config;

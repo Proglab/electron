@@ -143,6 +143,7 @@ class Treatment {
 
             i++;
         });
+        body += "Purchases:\r\n{\r\n" + heads + lines + "\r\n}\r\n";
         console.log('Transformation ending...');
         return this.template+body;
     }

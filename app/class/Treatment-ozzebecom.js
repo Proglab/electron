@@ -99,7 +99,7 @@ class Treatment {
             {
                 //traitement
                 let FlagDC = value.Debit == 0 ? 'C' : 'D';
-                let VATCode = '0';
+                let VATCode = '0S';
                 let GnrlID = value.Compte;
 
                 sum = FlagDC == 'C' ? parseFloat(sum) - parseFloat(parseFloat(value.Credit.replace(',', '.')).toFixed(2)) : parseFloat(sum) + parseFloat(parseFloat(value.Debit.replace(',', '.')).toFixed(2));
@@ -113,7 +113,7 @@ class Treatment {
                 line =  line.replace('[[AmountCrcy]]', FlagDC == 'C' ? parseFloat(value.Credit.replace(',', '.')).toFixed(2) : parseFloat(value.Debit.replace(',', '.')).toFixed(2));
                 line =  line.replace('[[AmountCrcyDoc]]', FlagDC == 'C' ? parseFloat(value.Credit.replace(',', '.')).toFixed(2) : parseFloat(value.Debit.replace(',', '.')).toFixed(2));
                 line =  line.replace('[[AmountCrcyBase]]', FlagDC == 'C' ? parseFloat(value.Credit.replace(',', '.')).toFixed(2) : parseFloat(value.Debit.replace(',', '.')).toFixed(2));
-                line =  line.replace('[[AmountVATCrcyDoc]]', FlagDC == 'C' ? (Math.round(parseFloat(value.Credit.replace(',', '.')*VATCode/100)*100)/100).toFixed(2) :  (Math.round(parseFloat(value.Debit.replace(',', '.')*VATCode/100)*100)/100).toFixed(2));
+                line =  line.replace('[[AmountVATCrcyDoc]]', FlagDC == 'C' ? (Math.round(parseFloat(value.Credit.replace(',', '.')*0/100)*100)/100).toFixed(2) :  (Math.round(parseFloat(value.Debit.replace(',', '.')*0/100)*100)/100).toFixed(2));
                 line =  line.replace('[[AnalRecordTag]]', '');
                 line =  line.replace('[[AnalQuantity]]', '0');
                 line =  line.replace('[[AnalPercent]]', '0.00');
@@ -143,6 +143,7 @@ class Treatment {
 
             i++;
         });
+        body += "Purchases:\r\n{\r\n" + heads + lines + "\r\n}\r\n";
         console.log('Transformation ending...');
         return this.template+body;
     }
