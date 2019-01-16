@@ -38,21 +38,38 @@ class Treatment {
         var num = '';
 
         var name = '';
+        var lastname = '';
 
         var lines = '';
+        var heads = '';
 
 
         $.each(text, function(index, value ) {
 
-            if (value.Libelle.substr(0, 17) == 'Urssaf Entreprise')
-            {
-                return true;
-            }
-
             if (name == '')
             {
                 name = value.Libelle.substr(11, value.Libelle.length);
+                lastname = name;
                 console.log('init ' + name);
+
+            }
+            else
+            {
+                let totalchar = value.Libelle.length;
+                let namechar = name.length;
+                name = value.Libelle.substr(totalchar - namechar, namechar);
+            }
+
+            if (name != lastname)
+            {
+                body += "Purchases:\r\n{\r\n" + heads + lines + "\r\n}\r\n";
+                lines = '';
+
+                console.log('TOTAL' + sum);
+                //total
+                name = '';
+
+                sum = 0;
 
             }
 
@@ -117,21 +134,15 @@ class Treatment {
                 head =  head.replace('[[DateDue]]', dateStr+' 00:00:00');
                 head =  head.replace('[[Piece]]', '');
                 head =  head.replace('[[CrcyDoc]]', "EUR");
-                head =  head.replace('[[AmountCrcyDoc]]', parseFloat(sum.toFixed(2)));
-                body += "Purchases:\r\n{\r\n" + head + lines + "\r\n}\r\n";
-                lines = '';
+                head =  head.replace('[[AmountCrcyDoc]]', parseFloat(sum).toFixed(2));
 
-                console.log('TOTAL' + sum);
-                //total
-                name = '';
-
-                sum = 0;
-
+                heads = head;
             }
+
+            lastname = name;
 
             i++;
         });
-        body = body.replace('[[AmountCrcyDoc]]', parseFloat(sum).toFixed(2));
         console.log('Transformation ending...');
         return this.template+body;
     }
