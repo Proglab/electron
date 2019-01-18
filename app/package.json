@@ -11,11 +11,11 @@
   "author": "Fabrice Gyre",
   "license": "private",
   "dependencies": {
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.0",
     "csv-parse": "^1.2.2",
     "electron-is-dev": "^0.3.0",
     "electron-log": "^2.2.9",
-    "electron-updater": "^3.2.2",
+    "electron-updater": "^3.2.3",
     "jquery": "^3.3.1"
   }
 }
