@@ -36,24 +36,26 @@ class Treatment {
 
         var dateYear = null;
 
+        var heads = '';
+        var lines = '';
+
 
         $.each(text, function(index, value ) {
 
             if (!$.isNumeric(value.Compte))
             {
-                if (i!=0 && value.NumPiece != oldNumPiece)
-                {
-                    body = body.replace('[[AmountCrcyDoc]]', parseFloat(sum).toFixed(2));
-                    sum=0;
-                }
-                oldNumPiece = value.NumPiece;
+                sum=0;
 
                 if (i > 0)
                 {
+                    body += "Sales:\r\n{\r\n";
+                    body += heads;
+                    body += lines;
                     body += "\r\n}\r\n";
+                    heads = '';
+                    lines = '';
                 }
                 console.log(headTemplate);
-                body += "Sales:\r\n{\r\n";
 
                 const dateStr = value.Date.replace('/', '-').replace('/', '-').replace('2017', '17');
                 const dateEchStr = value.DateEcheance.replace('/', '-').replace('/', '-').replace('2017', '17');
@@ -71,18 +73,29 @@ class Treatment {
                 let head =  headTemplate.replace('[[JrnlID]]', value.Libelle.indexOf("AVOIR") == 0 ? 'FV1' : 'FV4');
                 head =  head.replace('[[DocType]]', 1);
                 head =  head.replace('[[DocNumber]]', value.NumPiece.replace('FF', '10').replace('AF', '11'));
-                head =  head.replace('[[CustID]]', value.CompteTiers.replace('AZ_', ''));
+
+                var index = value.CompteTiers.indexOf('_');
+
+
+                console.log('head');
+                console.log(value);
+
+
+                head =  head.replace('[[CustID]]', value.CompteTiers.substring(index+1, value.CompteTiers.length - index));
                 head =  head.replace('[[Comment]]', value.Libelle);
                 head =  head.replace('[[PeriodID]]', parseInt(date[1]));
-                head =  head.replace('[[DateDoc]]',dateStr+' 00:00:00');
-                head =  head.replace('[[DateDue]]', dateEchStr == '' ? dateStr +' 00:00:00' : dateEchStr + ' 00:00:00');
+                head =  head.replace('[[DateDoc]]',dateStr);
+                head =  head.replace('[[DateDue]]', dateEchStr == '' ? dateStr : dateEchStr);
                 head =  head.replace('[[Piece]]', '');
                 head =  head.replace('[[CrcyDoc]]', "EUR");
-                //head =  head.replace('[[AmountCrcyDoc]]', parseFloat(value.Debit.replace(',', '.')).toFixed(2));
-                body += head;
+                head =  head.replace('[[AmountCrcyDoc]]', value.Credit == '0' ? parseFloat(value.Debit.replace(',', '.')).toFixed(2) : parseFloat(value.Credit.replace(',', '.')).toFixed(2));
+                heads += head;
             }
             else
             {
+                console.log('line');
+                console.log(value);
+
                 if (value.Compte.substr(0, 1) == 4)
                 {
                     return true;
@@ -91,9 +104,6 @@ class Treatment {
                 let FlagDC = value.Debit == 0 ? 'C' : 'D';
                 let VATCode = params[value.Compte].tva;
                 let GnrlID = params[value.Compte].facture;
-
-                sum = FlagDC == 'C' ? parseFloat(sum) + parseFloat(parseFloat(value.Credit.replace(',', '.')).toFixed(2)) : parseFloat(sum) + parseFloat(parseFloat(value.Debit.replace(',', '.')).toFixed(2));
-                sum = FlagDC == 'C' ? parseFloat(sum) + parseFloat(Math.round(parseFloat(value.Credit.replace(',', '.')*VATCode/100)*100)/100) : parseFloat(sum) + parseFloat(Math.round(parseFloat(value.Debit.replace(',', '.')*VATCode/100)*100)/100);
 
                 let line =  lineTemplate.replace('[[GnrlID]]', GnrlID);
                 line =  line.replace('[[AnalID]]', '');
@@ -108,13 +118,16 @@ class Treatment {
                 line =  line.replace('[[AnalRecordTag]]', '');
                 line =  line.replace('[[AnalQuantity]]', '0');
                 line =  line.replace('[[AnalPercent]]', '0.00');
-                body += line;
+                lines += line;
 
             }
             i++;
         });
-        body = body.replace('[[AmountCrcyDoc]]', parseFloat(sum).toFixed(2));
-        body += '}';
+
+        body += "Sales:\r\n{\r\n";
+        body += heads;
+        body += lines;
+        body += "\r\n}\r\n";
         console.log('Transformation ending...');
 
 

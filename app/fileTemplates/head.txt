@@ -1,14 +1,14 @@
 	Header:
 	{
-		JrnlID:			"[[JrnlID]]"
-		DocType:		[[DocType]]
-		DocNumber:		"[[DocNumber]]"
-		CustID:			"[[CustID]]"
-		Comment:		"[[Comment]]"
-		PeriodID:		"[[PeriodID]]"
-		DateDoc:		"[[DateDoc]]"
-		DateDue:		"[[DateDue]]"
-		Piece:			"[[Piece]]"
-		CrcyDoc:		"[[CrcyDoc]]"
-		AmountCrcyDoc:		"[[AmountCrcyDoc]]"
+		JrnlID: "[[JrnlID]]"
+		DocType: "[[DocType]]"
+		DocNumber: "[[DocNumber]]"
+		CustID: "[[CustID]]"
+		Comment: "[[Comment]]"
+		PeriodID: "[[PeriodID]]"
+		DateDoc: "[[DateDoc]]"
+		DateDue: "[[DateDue]]"
+		Piece: "[[Piece]]"
+		CrcyDoc: "[[CrcyDoc]]"
+		AmountCrcyDoc: "[[AmountCrcyDoc]]"
 	}
