@@ -1,16 +1,16 @@
 	Line:
 	{
-		GnrlID:			"[[GnrlID]]"
-		AnalID:			"[[AnalID]]"
-		VATCode:		"[[VATCode]]"
-		Comment:		"[[Comment]]"
-		FlagDC:			[[FlagDC]]
-		CrcyID:			"[[CrcyID]]"
-		AmountCrcy:		"[[AmountCrcy]]"
-		AmountCrcyDoc:		"[[AmountCrcyDoc]]"
-		AmountCrcyBase:		"[[AmountCrcyBase]]"
-		AmountVATCrcyDoc:	"[[AmountVATCrcyDoc]]"
-		AnalRecordTag:		"[[AnalRecordTag]]"
-		AnalQuantity:		"[[AnalQuantity]]"
-		AnalPercent:		"[[AnalPercent]]"
+		GnrlID: "[[GnrlID]]"
+		AnalID: "[[AnalID]]"
+		VATCode: "[[VATCode]]"
+		Comment: "[[Comment]]"
+		FlagDC: [[FlagDC]]
+		CrcyID: "[[CrcyID]]"
+		AmountCrcy: "[[AmountCrcy]]"
+		AmountCrcyDoc: "[[AmountCrcyDoc]]"
+		AmountCrcyBase: "[[AmountCrcyBase]]"
+		AmountVATCrcyDoc: "[[AmountVATCrcyDoc]]"
+		AnalRecordTag: "[[AnalRecordTag]]"
+		AnalQuantity: "[[AnalQuantity]]"
+		AnalPercent: "[[AnalPercent]]"
 	}
