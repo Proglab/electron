@@ -28,6 +28,7 @@ class Treatment {
         var body = '';
 
         var i = 0;
+        var k = 0;
 
 
         var sum = 0;
@@ -141,6 +142,14 @@ class Treatment {
 
         var i = 0;
         $.each(linesData, function (index, line) {
+
+            linesData[i]['somme1'] = parseFloat(linesData[i]['somme1']) * 100;
+            linesData[i]['somme2'] = parseFloat(linesData[i]['somme2']) * 100;
+
+            linesData[i]['somme1'] = Math.trunc(linesData[i]['somme1']) / 100;
+            linesData[i]['somme2'] = Math.round(linesData[i]['somme2']) / 100;
+
+
             if (linesData[i]['head']['AmountCrcyDoc'] == linesData[i]['somme1']) {
                 var j = 0;
                 $.each(linesData[i]['lines'], function (index, line) {
@@ -163,17 +172,35 @@ class Treatment {
             }
 
             if (linesData[i]['head']['AmountCrcyDoc'] != linesData[i]['somme2'] && linesData[i]['head']['AmountCrcyDoc'] != linesData[i]['somme1']) {
-                var cust = linesData[i]['somme1'].toString().indexOf('.');
+                k++;
+                var cust = linesData[i]['somme2'].toString().indexOf('.');
 
-
-                linesData[i]['head']['AmountCrcyDoc'] = linesData[i]['somme1'].toString().substring(0, cust + 3);
+                console.log('AmountCrcyDoc');
+                console.log(linesData[i]['head']['AmountCrcyDoc']);
+                console.log('somme1');
+                console.log(linesData[i]['somme1']);
+                console.log('somme2');
+                console.log(linesData[i]['somme2']);
+                console.log('Comment');
+                console.log(linesData[i]['head']['Comment']);
                 var j = 0;
                 $.each(linesData[i]['lines'], function (index, line) {
                     if (linesData[i]['lines'][j]['AmountVATCrcyDoc'] == null) {
-                        linesData[i]['lines'][j]['AmountVATCrcyDoc'] = linesData[i]['lines'][j]['tva1'];
+                        linesData[i]['lines'][j]['AmountVATCrcyDoc'] = linesData[i]['lines'][j]['tva2'];
                     }
                     j++;
                 });
+
+                var diff = linesData[i]['head']['AmountCrcyDoc'] - parseFloat(linesData[i]['somme2'].toString().substring(0, cust + 3));
+                diff = Math.round(diff*100) / 100;
+
+                console.log('Différences');
+                console.log(diff);
+                console.log(linesData[i]['lines']);
+
+                var b = linesData[i]['lines'].length - 1;
+                linesData[i]['lines'][b]['AmountVATCrcyDoc'] = Math.round((linesData[i]['lines'][b]['AmountVATCrcyDoc'] + diff)*100)/ 100;
+                console.log('--------------');
             }
             i++;
         });
@@ -219,6 +246,7 @@ class Treatment {
 
         });
 
+        console.log(k+'/'+i);
 
         var aactingselect = dateYear - 2012;
         this.template = this.template.replace('[[AcctingSelect]]', aactingselect < 10 ? '0' + aactingselect : aactingselect);

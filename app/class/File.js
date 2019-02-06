@@ -19,7 +19,7 @@ let File =  Object.create({
         if (!files) { return; }
 
         this.file = files[0];
-        this.content = fs.readFileSync(this.file).toString();
+        this.content = fs.readFileSync(this.file, 'latin1').toString();
         return this;
     },
     save: (content) => {
@@ -33,7 +33,7 @@ let File =  Object.create({
 
         if (!fileName) { return; }
 
-        fs.writeFileSync(fileName, this.content);
+        fs.writeFileSync(fileName, this.content, 'utf-8');
     }
 });
 module.exports.File = File;
