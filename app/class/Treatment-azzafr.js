@@ -5,9 +5,9 @@ const azzafr = require('../config/azzafr');
 
 class Treatment {
     constructor() {
-        this.CreateKeyAll= azzafr.CreateKeyAll;
-        this.IgnoreAnalClosed= azzafr.IgnoreAnalClosed;
-        this.DossierSelect= azzafr.DossierSelect;
+        this.CreateKeyAll = azzafr.CreateKeyAll;
+        this.IgnoreAnalClosed = azzafr.IgnoreAnalClosed;
+        this.DossierSelect = azzafr.DossierSelect;
     }
 
     treat(text) {
@@ -18,7 +18,6 @@ class Treatment {
         txtTransformed = txtTransformed.replace('[[IgnoreAnalClosed]]', this.IgnoreAnalClosed);
         txtTransformed = txtTransformed.replace('[[DossierSelect]]', this.DossierSelect);
         this.template = txtTransformed;
-
 
         dir = path.join(__dirname, '../fileTemplates', 'head.txt');
         var headTemplate = fs.readFileSync(dir).toString();
@@ -31,74 +30,60 @@ class Treatment {
         var i = 0;
 
 
-        var sum=0;
-        var oldNumPiece = null;
+        var sum = 0;
 
         var dateYear = null;
 
-        var heads = '';
         var lines = '';
 
 
-        $.each(text, function(index, value ) {
+        var linesData = [];
+        var nbrLinesData = linesData.length;
 
-            if (!$.isNumeric(value.Compte))
-            {
-                sum=0;
+        var j = 0;
 
-                if (i > 0)
-                {
-                    body += "Sales:\r\n{\r\n";
-                    body += heads;
-                    body += lines;
-                    body += "\r\n}\r\n";
-                    heads = '';
-                    lines = '';
-                }
-                console.log(headTemplate);
 
-                const dateStr = value.Date.replace('/', '-').replace('/', '-').replace('2017', '17');
-                const dateEchStr = value.DateEcheance.replace('/', '-').replace('/', '-').replace('2017', '17');
+        $.each(text, function (index, value) {
 
-                console.log(dateEchStr);
+            var d = value.Date.replace('/', '-').replace('/', '-').split('-');
+            dateYear = d[2];
 
-                const date = dateStr.split('-');
-                if (dateYear == null)
-                {
-                    var d = value.Date.replace('/', '-').replace('/', '-').split('-');
-                    dateYear = d[2];
+            if (!$.isNumeric(value.Compte)) {
+                sum = 0;
+
+                if (i > 0) {
+                    nbrLinesData++;
+                    j = 0;
+
                 }
 
-
-                let head =  headTemplate.replace('[[JrnlID]]', value.Libelle.indexOf("AVOIR") == 0 ? 'FV1' : 'FV4');
-                head =  head.replace('[[DocType]]', 1);
-                head =  head.replace('[[DocNumber]]', value.NumPiece.replace('FF', '10').replace('AF', '11'));
-
-                var index = value.CompteTiers.indexOf('_');
-
-
-                console.log('head');
-                console.log(value);
                 var len = value.CompteTiers.length;
+                const dateStr = value.Date.replace('/', '-').replace('/', '-');
+                const date = dateStr.split('-');
+                const dateEchStr = value.DateEcheance.replace('/', '-').replace('/', '-');
+                if (typeof linesData[nbrLinesData] === 'undefined') {
+                    var cust = value.CompteTiers.indexOf('_');
+                    linesData[nbrLinesData] = [];
+                    linesData[nbrLinesData]['head'] = [];
+                    linesData[nbrLinesData]['head']['JrnlID'] = value.Libelle.indexOf("AVOIR") == 0 ? 'FV1' : 'FV4';
+                    linesData[nbrLinesData]['head']['CustID'] = value.CompteTiers.substring(cust + 1, len);
+                    linesData[nbrLinesData]['head']['DocType'] = 1;
+                    linesData[nbrLinesData]['head']['DocNumber'] = value.NumPiece.replace('FF', '10').replace('AF', '11');
+                    linesData[nbrLinesData]['head']['Comment'] = value.Libelle;
+                    linesData[nbrLinesData]['head']['PeriodID'] = parseInt(date[1]);
+                    linesData[nbrLinesData]['head']['DateDoc'] = dateStr;
+                    linesData[nbrLinesData]['head']['Piece'] = '';
+                    linesData[nbrLinesData]['head']['CrcyDoc'] = 'EUR';
+                    linesData[nbrLinesData]['head']['DateDue'] = dateEchStr == '' ? dateStr : dateEchStr;
+                    linesData[nbrLinesData]['head']['AmountCrcyDoc'] = value.Credit == '0' ? parseFloat(value.Debit.replace(',', '.')) : parseFloat(value.Credit.replace(',', '.'));
+                    linesData[nbrLinesData]['lines'] = [];
+                }
 
+                linesData[nbrLinesData]['somme1'] = 0;
+                linesData[nbrLinesData]['somme2'] = 0;
 
-                head =  head.replace('[[CustID]]', value.CompteTiers.substring(index+1, len));
-                head =  head.replace('[[Comment]]', value.Libelle);
-                head =  head.replace('[[PeriodID]]', parseInt(date[1]));
-                head =  head.replace('[[DateDoc]]',dateStr);
-                head =  head.replace('[[DateDue]]', dateEchStr == '' ? dateStr : dateEchStr);
-                head =  head.replace('[[Piece]]', '');
-                head =  head.replace('[[CrcyDoc]]', "EUR");
-                head =  head.replace('[[AmountCrcyDoc]]', value.Credit == '0' ? parseFloat(value.Debit.replace(',', '.')).toFixed(2) : parseFloat(value.Credit.replace(',', '.')).toFixed(2));
-                heads += head;
-            }
-            else
-            {
-                console.log('line');
-                console.log(value);
-
-                if (value.Compte.substr(0, 1) == 4)
-                {
+            } else {
+                if (value.Compte.substr(0, 1) == 4) {
                     return true;
                 }
 
@@ -107,49 +92,138 @@ class Treatment {
                 let GnrlID = params[value.Compte].facture;
 
                 let tva = 0;
-                if (FlagDC == 'C')
-                {
-                    tva = parseFloat(value.Credit.replace(',', '.'))*VATCode;
-                    tva = Math.trunc(parseFloat(tva))/100;
-                }
-                else
-                {
-                    tva = parseFloat(value.Debit.replace(',', '.'))*VATCode;
-                    tva = Math.trunc(parseFloat(tva))/100;
+                let tva1 = 0;
+                let tva2 = 0;
+                if (FlagDC == 'C') {
+                    tva = parseFloat(value.Credit.replace(',', '.')) * VATCode;
+                    tva1 = Math.trunc(parseFloat(tva)) / 100;
+                    tva2 = Math.round(parseFloat(tva)) / 100;
+                } else {
+                    tva = parseFloat(value.Debit.replace(',', '.')) * VATCode;
+                    tva1 = Math.trunc(parseFloat(tva)) / 100;
+                    tva2 = Math.round(parseFloat(tva)) / 100;
                 }
 
-                let line =  lineTemplate.replace('[[GnrlID]]', GnrlID);
-                line =  line.replace('[[AnalID]]', '');
-                line =  line.replace('[[VATCode]]', VATCode);
-                line =  line.replace('[[Comment]]', value.Libelle);
-                line =  line.replace('[[FlagDC]]', FlagDC);
-                line =  line.replace('[[CrcyID]]', 'EUR');
-                line =  line.replace('[[AmountCrcy]]', FlagDC == 'C' ? parseFloat(value.Credit.replace(',', '.')).toFixed(2) : parseFloat(value.Debit.replace(',', '.')).toFixed(2));
-                line =  line.replace('[[AmountCrcyDoc]]', FlagDC == 'C' ? parseFloat(value.Credit.replace(',', '.')).toFixed(2) : parseFloat(value.Debit.replace(',', '.')).toFixed(2));
-                line =  line.replace('[[AmountCrcyBase]]', FlagDC == 'C' ? parseFloat(value.Credit.replace(',', '.')).toFixed(2) : parseFloat(value.Debit.replace(',', '.')).toFixed(2));
-                line =  line.replace('[[AmountVATCrcyDoc]]', tva);
-                line =  line.replace('[[AnalRecordTag]]', '');
-                line =  line.replace('[[AnalQuantity]]', '0');
-                line =  line.replace('[[AnalPercent]]', '0.00');
-                lines += line;
+                var s = FlagDC == 'C' ? parseFloat(value.Credit.replace(',', '.')).toFixed(2) : parseFloat(value.Debit.replace(',', '.')).toFixed(2);
+
+                linesData[nbrLinesData]['lines'][j] = [];
+                linesData[nbrLinesData]['lines'][j]['GnrlID'] = GnrlID;
+                linesData[nbrLinesData]['lines'][j]['AnalID'] = '';
+                linesData[nbrLinesData]['lines'][j]['VATCode'] = VATCode;
+                linesData[nbrLinesData]['lines'][j]['Comment'] = value.Libelle;
+                linesData[nbrLinesData]['lines'][j]['FlagDC'] = FlagDC;
+                linesData[nbrLinesData]['lines'][j]['CrcyID'] = 'EUR';
+                linesData[nbrLinesData]['lines'][j]['AmountCrcy'] = s;
+                linesData[nbrLinesData]['lines'][j]['AmountCrcyDoc'] = s;
+                linesData[nbrLinesData]['lines'][j]['AmountCrcyBase'] = s;
+                linesData[nbrLinesData]['lines'][j]['AnalRecordTag'] = '';
+                linesData[nbrLinesData]['lines'][j]['AnalQuantity'] = '0';
+                linesData[nbrLinesData]['lines'][j]['AnalPercent'] = '0.00';
+
+                if (tva1 == tva2) {
+                    linesData[nbrLinesData]['lines'][j]['AmountVATCrcyDoc'] = tva1;
+                } else {
+                    linesData[nbrLinesData]['lines'][j]['AmountVATCrcyDoc'] = null;
+
+                    linesData[nbrLinesData]['lines'][j]['tva1'] = tva1;
+                    linesData[nbrLinesData]['lines'][j]['tva2'] = tva2;
+                }
+
+
+                linesData[nbrLinesData]['somme1'] = parseFloat(tva1) + parseFloat(s) + parseFloat(linesData[nbrLinesData]['somme1']);
+                linesData[nbrLinesData]['somme2'] = parseFloat(tva2) + parseFloat(s) + parseFloat(linesData[nbrLinesData]['somme2']);
+
+                j++;
 
             }
             i++;
         });
 
-        body += "Sales:\r\n{\r\n";
-        body += heads;
-        body += lines;
-        body += "\r\n}\r\n";
-        console.log('Transformation ending...');
+        var i = 0;
+        $.each(linesData, function (index, line) {
+            if (linesData[i]['head']['AmountCrcyDoc'] == linesData[i]['somme1']) {
+                var j = 0;
+                $.each(linesData[i]['lines'], function (index, line) {
+                    if (linesData[i]['lines'][j]['AmountVATCrcyDoc'] == null) {
+                        linesData[i]['lines'][j]['AmountVATCrcyDoc'] = linesData[i]['lines'][j]['tva1'];
+                    }
+                    j++;
+                });
+            }
+
+            if (linesData[i]['head']['AmountCrcyDoc'] == linesData[i]['somme2']) {
+                var j = 0;
+                $.each(linesData[i]['lines'], function (index, line) {
+                    if (linesData[i]['lines'][j]['AmountVATCrcyDoc'] == null) {
+                        linesData[i]['lines'][j]['AmountVATCrcyDoc'] = linesData[i]['lines'][j]['tva2'];
+                    }
+                    j++;
+                });
+
+            }
+
+            if (linesData[i]['head']['AmountCrcyDoc'] != linesData[i]['somme2'] && linesData[i]['head']['AmountCrcyDoc'] != linesData[i]['somme1']) {
+                var cust = linesData[i]['somme1'].toString().indexOf('.');
 
 
-        console.log('dateYear' + dateYear);
+                linesData[i]['head']['AmountCrcyDoc'] = linesData[i]['somme1'].toString().substring(0, cust + 3);
+                var j = 0;
+                $.each(linesData[i]['lines'], function (index, line) {
+                    if (linesData[i]['lines'][j]['AmountVATCrcyDoc'] == null) {
+                        linesData[i]['lines'][j]['AmountVATCrcyDoc'] = linesData[i]['lines'][j]['tva1'];
+                    }
+                    j++;
+                });
+            }
+            i++;
+        });
+
+        $.each(linesData, function (index, line) {
+
+            let head = headTemplate.replace('[[JrnlID]]', line['head']['JrnlID']);
+            head = head.replace('[[DocType]]', line['head']['DocType']);
+            head = head.replace('[[DocNumber]]', line['head']['DocNumber']);
+            head = head.replace('[[CustID]]', line['head']['CustID']);
+            head = head.replace('[[Comment]]', line['head']['Comment']);
+            head = head.replace('[[PeriodID]]', line['head']['PeriodID']);
+            head = head.replace('[[DateDoc]]', line['head']['DateDoc']);
+            head = head.replace('[[DateDue]]', line['head']['DateDue']);
+            head = head.replace('[[Piece]]', line['head']['Piece']);
+            head = head.replace('[[CrcyDoc]]', line['head']['CrcyDoc']);
+            head = head.replace('[[AmountCrcyDoc]]', line['head']['AmountCrcyDoc']);
+
+            let lines = '';
+
+            $.each(line['lines'], function (ind, lin) {
+                let lineTxt = lineTemplate.replace('[[GnrlID]]', lin['GnrlID']);
+                lineTxt = lineTxt.replace('[[AnalID]]', '');
+                lineTxt = lineTxt.replace('[[VATCode]]', lin['VATCode']);
+                lineTxt = lineTxt.replace('[[Comment]]', lin['Comment']);
+                lineTxt = lineTxt.replace('[[FlagDC]]', lin['FlagDC']);
+                lineTxt = lineTxt.replace('[[CrcyID]]', lin['CrcyID']);
+                lineTxt = lineTxt.replace('[[AmountCrcy]]', lin['AmountCrcy']);
+                lineTxt = lineTxt.replace('[[AmountCrcyDoc]]', lin['AmountCrcyDoc']);
+                lineTxt = lineTxt.replace('[[AmountCrcyBase]]', lin['AmountCrcyBase']);
+                lineTxt = lineTxt.replace('[[AmountVATCrcyDoc]]', lin['AmountVATCrcyDoc']);
+                lineTxt = lineTxt.replace('[[AnalRecordTag]]', '');
+                lineTxt = lineTxt.replace('[[AnalQuantity]]', '0');
+                lineTxt = lineTxt.replace('[[AnalPercent]]', '0.00');
+                lines += lineTxt;
+
+            });
+
+            body += "Sales:\r\n{\r\n";
+            body += head;
+            body += lines;
+            body += "\r\n}\r\n";
+
+        });
+
 
         var aactingselect = dateYear - 2012;
-        this.template = this.template.replace('[[AcctingSelect]]', aactingselect < 10 ? '0'+aactingselect : aactingselect);
+        this.template = this.template.replace('[[AcctingSelect]]', aactingselect < 10 ? '0' + aactingselect : aactingselect);
 
-        return this.template+body;
+        return this.template + body;
     }
 
 
