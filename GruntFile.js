@@ -34,7 +34,7 @@ module.exports = function (grunt) {
         rename: {
             main: {
                 files: [
-                    {src: ['dist/Imoges_app Setup *.*'], dest: 'dist/Imoges_app-Setup-<%= pkg.version %>.exe'},
+                    {src: ['dist/moka2popsy Setup *.*'], dest: 'dist/moka2popsy-Setup-<%= pkg.version %>.exe'},
                 ]
             }
         },
