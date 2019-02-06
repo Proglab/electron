@@ -34,7 +34,7 @@ module.exports = function (grunt) {
         rename: {
             main: {
                 files: [
-                    {src: ['dist/moka2popsy Setup <%= pkg.version %>.exe'], dest: 'dist/moka2popsy-Setup-<%= pkg.version %>.exe'},
+                    {src: ['dist/moka2popsy Setup <%= pkg.version %>.exe'], dest: 'dist/moka2popsy-setup-<%= pkg.version %>.exe'},
                 ]
             }
         },
@@ -69,6 +69,14 @@ module.exports = function (grunt) {
             },
             files: {
                 // Specify the files you want to commit
+            }
+        },
+        gittag: {
+            addtag: {
+                options: {
+                    tag: 'v<%= pkg.version %>',
+                    message: 'v<%= pkg.version %>'
+                }
             }
         },
         gitpull: {

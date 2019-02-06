@@ -1,6 +1,6 @@
 {
   "name": "moka2popsy",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Transformation d'un fichier Moka en Popsy",
   "main": "main.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "dist:mac": "npm run clean:mac && build --mac",
     "dist:win": "npm run clean:win && build --win",
     "dist": "electron-builder",
-    "dist:release:patch:win:manu1": "grunt before --force && grunt version::patch --force && grunt gitadd --force && grunt gitcommit --force && grunt gitpull --force",
+    "dist:release:patch:win:manu1": "grunt before --force && grunt version::patch --force && grunt gitadd --force && grunt gitcommit --force && grunt gittag --force && grunt gitpull --force",
     "dist:release:patch:win:manu2": "build --win && grunt after --force"
   },
   "repository": {
