@@ -1,6 +1,6 @@
 {
   "name": "moka2popsy",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Transformation d'un fichier Moka en Popsy",
   "main": "main.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "dist:mac": "npm run clean:mac && build --mac",
     "dist:win": "npm run clean:win && build --win",
     "dist": "electron-builder",
-    "dist:release:patch:win:manu1": "grunt before --force && grunt version::patch --force && grunt gitadd --force && grunt gitcommit --force && grunt gittag --force && grunt gitpull --force",
+    "dist:release:patch:win:manu1": "grunt before --force && grunt version::patch --force && grunt gitadd --force && grunt gitcommit --force && grunt gittag --force && grunt gitpull --force && grunt gitpush --force",
     "dist:release:patch:win:manu2": "build --win && grunt after --force"
   },
   "repository": {
@@ -24,18 +24,18 @@
   "author": "Fabrice Gyre",
   "license": "private",
   "devDependencies": {
-    "asar": "^0.13.1",
+    "asar": "^0.14.6",
     "devtron": "^1.4.0",
-    "electron": "^1.8.8",
+    "electron": "^4.0.4",
     "electron-builder": "^20.38.5",
-    "electron-debug": "^1.5.0",
-    "electron-packager": "^12.2.0",
+    "electron-debug": "^2.1.0",
+    "electron-packager": "^13.0.1",
     "grunt": "^1.0.3",
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-jshint": "^2.0.0",
     "grunt-git": "^1.0.10",
     "grunt-version": "^1.3.0",
-    "xo": "^0.18.2"
+    "xo": "^0.24.0"
   },
   "build": {
     "appId": "com.my.app",
@@ -76,11 +76,11 @@
     }
   },
   "dependencies": {
-    "bootstrap": "^3.4.0",
-    "csv-parse": "^1.3.3",
-    "electron-is-dev": "^0.3.0",
-    "electron-log": "^2.2.17",
-    "electron-updater": "^4.0.0",
+    "bootstrap": "^4.2.1",
+    "csv-parse": "^4.3.1",
+    "electron-is-dev": "^1.0.1",
+    "electron-log": "^3.0.1",
+    "electron-updater": "^4.0.6",
     "grunt-github-releaser": "^0.1.18",
     "grunt-rename-util": "^1.0.0",
     "jquery": "^3.3.1"
