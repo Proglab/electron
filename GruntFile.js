@@ -87,9 +87,10 @@ module.exports = function (grunt) {
             }
         },
         gitpush: {
-            master: {
+            tag: {
                 options: {
-                    all:true
+                    branch:'master',
+                    tags:true
                 }
             }
         },
