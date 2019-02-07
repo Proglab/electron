@@ -34,11 +34,11 @@ app.on('activate', () => {
 });
 
 app.on('ready', () => {
+    console.log('The application is ready.');
+    mainWindow = Window.create(800,800);
     if (!isDev) {
         autoUpdater.checkForUpdates();
     }
-    console.log('The application is ready.');
-    mainWindow = Window.create(800,800);
 
 });
 
